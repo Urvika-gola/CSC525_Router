@@ -22,7 +22,7 @@ Some screenshots:
 
 ### Successful retrieval of a web page and retrieval of large web object
 
-![wget_webpage](res/wget_webpage.jpeg)
+![wget_webpage](res/wget_web_page.jpeg)
 
 ### Successful retrieval of a large web object
 
