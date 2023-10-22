@@ -34,13 +34,13 @@ endif
 
 CFLAGS = -g -Wall -std=gnu99 -D_DEBUG_ -DVNL $(ARCH)
 
-LIBS= $(SOCK) -lm
+LIBS= $(SOCK) -lm -lresolv -lpthread
 PFLAGS= -follow-child-processes=yes -cache-dir=/tmp/${USER}
 PURIFY= purify ${PFLAGS}
 
 sr_SRCS = vnlconn.c sr_router.c sr_main.c  \
           sr_if.c sr_rt.c sr_vns_comm.c   \
-          sr_dumper.c sha1.c \
+          sr_dumper.c sha1.c sr_pwospf.c \
 		  IP_Mac_Mapping.c IP_Mac_Mapping_Buffer.c \
 		  router_utilities.c
 
@@ -70,11 +70,11 @@ clean-deps:
 	rm -f .*.d
 
 dist-clean: clean clean-deps
-	rm -f .*.swp sr_stub.tar.gz
+	rm -f .*.swp pwospf_stub.tar.gz
 
 dist: dist-clean
-	(cd ..; tar -X stub/exclude -cvf sr_stub.tar stub/; gzip sr_stub.tar); \
-    mv ../sr_stub.tar.gz .
+	(cd ..; tar -X pwospf_stub/exclude -cvf pwospf_stub.tar pwospf_stub/; gzip pwospf_stub.tar); \
+    mv ../pwospf_stub.tar.gz .
 
 tags:
 	ctags *.c

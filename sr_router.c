@@ -27,7 +27,7 @@
 #include "IP_Mac_Mapping.h"
 #include "IP_Mac_Mapping_Buffer.h"
 #include "router_utilities.h"
-
+#include "sr_pwospf.h"
 
 void process_icmp_packet(struct sr_instance* sr,
 uint8_t * packet,
