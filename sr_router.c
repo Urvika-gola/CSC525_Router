@@ -29,7 +29,7 @@
 #include "router_utilities.h"
 #include "sr_pwospf.h"
 
-void process_icmp_packet(struct sr_instance* sr,
+void process_icmp_packet_packet(struct sr_instance* sr,
 uint8_t * packet,
 unsigned int len,
 char* interface);
@@ -354,7 +354,8 @@ void process_ip_packet(
     }
 
     // Check if the destination IP matches any of the router's interfaces.
-    struct sr_if* interface_iterator = sr->if_list;
+    struct sr_if* interface_iterator = 0;
+    interface_iterator = sr->if_list;
     while(interface_iterator) {
         DebugMAC(interface_iterator->addr);
         if(interface_iterator->ip == destination_ip) {
@@ -365,7 +366,7 @@ void process_ip_packet(
     }
 
     // Find a route for the destination IP.
-    struct sr_rt* routing_iterator = NULL, *default_route = NULL;
+    struct sr_rt* routing_iterator = NULL, *default_route = NULL, *match = NULL;
     if(sr->routing_table == 0) {
         printf(" *warning* Routing table empty \n");
         return;
@@ -377,16 +378,23 @@ void process_ip_packet(
             default_route = routing_iterator;
         } else if((destination_ip & routing_iterator->mask.s_addr) == 
                   (routing_iterator->dest.s_addr & routing_iterator->mask.s_addr)) {
-            break;
+           if(match == NULL || routing_iterator->mask.s_addr > match->mask.s_addr) {
+			   match = routing_iterator;
+			   }
         }
         routing_iterator = routing_iterator->next;
     }
 
     // Use the default route if no specific route is found.
-    if(routing_iterator == NULL && default_route != NULL) {
-        routing_iterator = default_route;
-        destination_ip = routing_iterator->gw.s_addr;
+    if(match == NULL && default_route != NULL) {
+        match = default_route;
+        destination_ip = match->gw.s_addr;
         use_default_route = 1;
+    }
+    else if(match == NULL) {
+    	return;
+    } else if(match->gw.s_addr != 0) {
+	    destination_ip = match->gw.s_addr;
     }
 
     // Check ARP cache for MAC address.
@@ -408,11 +416,11 @@ void process_ip_packet(
             }
 
             // Update Ethernet header and send the packet.
-            struct sr_if* interface_info = sr_get_interface(sr, routing_iterator->interface);
+            struct sr_if* interface_info = sr_get_interface(sr, match->interface);
             memcpy(ethernet_header->ether_shost, interface_info->addr, sizeof(ethernet_header->ether_shost));
             memcpy(ethernet_header->ether_dhost, mac_address, sizeof(ethernet_header->ether_dhost));
 
-            int send_status = sr_send_packet(sr, packet_data, packet_length, routing_iterator->interface);
+            int send_status = sr_send_packet(sr, packet_data, packet_length, match->interface);
             assert(send_status == 0);
             return;
         }
@@ -426,10 +434,10 @@ void process_ip_packet(
         if(buffer_check == NULL) {
             buffer_check = insert_new_buffer_entry(&buf_head, destination_ip);
             enqueue_packet(buffer_check, packet_data, packet_length);
-            if(use_default_route) {
-                transfer_arp_packet(sr, packet_data, routing_iterator->interface, destination_ip);
+            if(use_default_route || match->gw.s_addr != 0) {
+                transfer_arp_packet(sr, packet_data, match->interface, destination_ip);
             } else {
-                transfer_arp_packet(sr, packet_data, routing_iterator->interface, 0);
+                transfer_arp_packet(sr, packet_data, match->interface, 0);
             }
         } else {
             enqueue_packet(buffer_check, packet_data, packet_length);
