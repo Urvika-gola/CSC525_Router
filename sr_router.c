@@ -357,7 +357,7 @@ void process_ip_packet(
     struct sr_if* interface_iterator = 0;
     interface_iterator = sr->if_list;
     while(interface_iterator) {
-        DebugMAC(interface_iterator->addr);
+	//DebugMAC(interface_iterator->addr);
         if(interface_iterator->ip == destination_ip) {
             process_icmp_packet_packet(sr, packet_data, packet_length, interface_name);
             return;
