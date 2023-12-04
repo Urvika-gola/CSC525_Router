@@ -228,10 +228,9 @@ static void sr_destroy_instance(struct sr_instance* sr)
     {
         sr_dump_close(sr->logfile);
     }
-
-    /*
+  
     fprintf(stderr,"sr_destroy_instance leaking memory\n");
-    */
+    
 } /* -- sr_destroy_instance -- */
 
 /*-----------------------------------------------------------------------------

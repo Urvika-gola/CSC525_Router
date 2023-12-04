@@ -54,6 +54,23 @@ struct sr_if* sr_get_interface(struct sr_instance* sr, const char* name)
     return 0;
 } /* -- sr_get_interface -- */
 
+struct sr_if* sr_get_interface_neighbor_rid(struct sr_instance* sr, uint32_t rid) {
+    struct sr_if* if_walker = 0;
+
+    /* -- REQUIRES -- */
+    assert(sr);
+
+    if_walker = sr->if_list;
+
+    while(if_walker) {
+       if(if_walker->neighbor_rid == rid)
+        { return if_walker; }
+        if_walker = if_walker->next;
+    }
+
+    return 0;
+}
+
 /*--------------------------------------------------------------------- 
  * Method: sr_add_interface(..)
  * Scope: Global
@@ -64,6 +81,7 @@ struct sr_if* sr_get_interface(struct sr_instance* sr, const char* name)
 
 void sr_add_interface(struct sr_instance* sr, const char* name)
 {
+
     struct sr_if* if_walker = 0;
 
     /* -- REQUIRES -- */
@@ -74,8 +92,10 @@ void sr_add_interface(struct sr_instance* sr, const char* name)
     if(sr->if_list == 0)
     {
         sr->if_list = (struct sr_if*)malloc(sizeof(struct sr_if));
-        assert(sr->if_list);
-        sr->if_list->next = 0;
+        sr->if_list->next = NULL;
+        sr->if_list->neighbor_ip = 0;
+        sr->if_list->neighbor_rid = 0;
+        sr->if_list->up = 1; // assumed up to begin with
         strncpy(sr->if_list->name,name,SR_IFACE_NAMELEN);
         return;
     }
@@ -86,10 +106,12 @@ void sr_add_interface(struct sr_instance* sr, const char* name)
     {if_walker = if_walker->next; }
 
     if_walker->next = (struct sr_if*)malloc(sizeof(struct sr_if));
-    assert(if_walker->next);
     if_walker = if_walker->next;
     strncpy(if_walker->name,name,SR_IFACE_NAMELEN);
-    if_walker->next = 0;
+    if_walker->neighbor_ip = 0;
+    if_walker->neighbor_rid = 0;
+    if_walker->up = 1;
+    if_walker->next = NULL;
 } /* -- sr_add_interface -- */ 
 
 /*--------------------------------------------------------------------- 
@@ -214,10 +236,15 @@ void sr_print_if(struct sr_if* iface)
     ip_addr.s_addr = iface->ip;
     mask_addr.s_addr = iface->mask;
 
-    Debug("%s\n",iface->name);
+    Debug("Interface: %s\n",iface->name);
     Debug("  hardware address ");
     DebugMAC(iface->addr);
     Debug("\n");
-    Debug("  ip address %s\n",inet_ntoa(ip_addr));
     Debug("  mask %s\n",inet_ntoa(mask_addr));
+    Debug("  ip address %s\n",inet_ntoa(ip_addr));
+    ip_addr.s_addr = iface->neighbor_ip;
+    Debug("  neighbor ip address %s\n",inet_ntoa(ip_addr));
+    ip_addr.s_addr = iface->neighbor_rid;
+    Debug("  neighbor rid %s\n",inet_ntoa(ip_addr));
+    Debug("  link status: %d\n", iface->up);
 } /* -- sr_print_if -- */

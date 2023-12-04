@@ -1,6 +1,8 @@
 #ifndef ROUTER_UTILITIES
 #define ROUTER_UTILITIES
 
+#include "pwospf_protocol.h"
+#include "network_topology_manager.h"
 // Define a structure to represent the ICMP header
 struct IcmpHeader
 {

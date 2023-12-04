@@ -13,6 +13,8 @@
 #include "IP_Mac_Mapping_Buffer.h"
 #include "sr_router.h"
 #include "router_utilities.h"
+#include "pwospf_protocol.h"
+#include "network_topology_manager.h"
 
 /**
  * @brief Calculate the Internet Checksum for ICMP packets.

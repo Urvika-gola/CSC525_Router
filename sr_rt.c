@@ -97,11 +97,12 @@ void sr_add_rt_entry(struct sr_instance* sr, struct in_addr dest,
     if(sr->routing_table == 0)
     {
         sr->routing_table = (struct sr_rt*)malloc(sizeof(struct sr_rt));
-        assert(sr->routing_table);
         sr->routing_table->next = 0;
         sr->routing_table->dest = dest;
         sr->routing_table->gw   = gw;
         sr->routing_table->mask = mask;
+         sr->routing_table->static_flag = 0;
+
         strncpy(sr->routing_table->interface,if_name,SR_IFACE_NAMELEN);
 
         return;
@@ -113,13 +114,13 @@ void sr_add_rt_entry(struct sr_instance* sr, struct in_addr dest,
     {rt_walker = rt_walker->next; }
 
     rt_walker->next = (struct sr_rt*)malloc(sizeof(struct sr_rt));
-    assert(rt_walker->next);
     rt_walker = rt_walker->next;
 
     rt_walker->next = 0;
     rt_walker->dest = dest;
     rt_walker->gw   = gw;
     rt_walker->mask = mask;
+    rt_walker->static_flag = 0;
     strncpy(rt_walker->interface,if_name,SR_IFACE_NAMELEN);
 
 } /* -- sr_add_entry -- */
@@ -169,3 +170,24 @@ void sr_print_routing_entry(struct sr_rt* entry)
     printf("%s\n",entry->interface);
 
 } /* -- sr_print_routing_entry -- */
+
+char interface_exists(struct sr_instance* sr, char *name) {
+    struct sr_rt* rt_walker = 0;
+
+    if(sr->routing_table == 0) {
+        printf(" Routing table empty \n");
+        return 0;
+    }
+
+    rt_walker = sr->routing_table;
+    
+    while(rt_walker != NULL)
+    {
+        if(strcmp(rt_walker->interface, name) == 0) {
+            return 1;
+        }
+        rt_walker = rt_walker->next; 
+    }
+
+    return 0;
+} /* -- sr_print_routing_table -- */
