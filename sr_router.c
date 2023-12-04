@@ -20,36 +20,194 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+
+#include "network_topology_manager.h"
 #include "sr_if.h"
 #include "sr_rt.h"
 #include "sr_router.h"
 #include "sr_protocol.h"
+#include "pwospf_protocol.h"
 #include "IP_Mac_Mapping.h"
 #include "IP_Mac_Mapping_Buffer.h"
 #include "router_utilities.h"
 #include "sr_pwospf.h"
 
-void process_icmp_packet_packet(struct sr_instance* sr,
-uint8_t * packet,
-unsigned int len,
-char* interface);
-void process_ip_packet(struct sr_instance* sr,
-uint8_t * packet,
-unsigned int len,
-char* interface);
-void process_arp_packet(struct sr_instance* sr,
-uint8_t * packet,
-unsigned int len,
-char* interface);
-void transfer_arp_packet(struct sr_instance* sr,
-uint8_t * orig_packet,
-char* interface,
-uint32_t dest_ip);
+/**
+ * Handles PWOSPF (Project-Wide OSPF) protocol packets, processing both OSPF Hello and LSU packets.
+ *
+ * @param sr Pointer to the simple router instance.
+ * @param packet Pointer to the packet data.
+ * @param len Length of the packet.
+ * @param interface Name of the interface through which the packet was received.
+ */
+void handle_pwospf(struct sr_instance* sr,
+                   uint8_t * packet,
+                   unsigned int len,
+                   char* interface) {    
 
+    // Extract OSPF header from the packet
+    struct ospfv2_hdr *ospf_hdr = (struct ospfv2_hdr*) (packet + sizeof(struct sr_ethernet_hdr) + sizeof(struct ip));
 
-IP_Mac_Mapping arp_head;
-IP_Mac_Mapping_Buffer buf_head;
+    // Process OSPF Hello or LSU packets
+    if(ospf_hdr->type == OSPF_TYPE_HELLO) {
+        (sr->ospf_subsys); // Locking OSPF subsystem
+        handle_pwospf_hello(sr, packet, len, interface); // Handle OSPF Hello
+        release_pwospf_lock(sr->ospf_subsys); // Unlocking OSPF subsystem
+    }
+    else if(ospf_hdr->type == OSPF_TYPE_LSU) {
+        (sr->ospf_subsys); // Locking OSPF subsystem
+        // Handle OSPF LSU and send updates if topology changes
+        if(handle_pwospf_lsu(sr, packet, len, interface)) {
+            broadcast_topology_updates(sr); // Send topology update
+        }
+        release_pwospf_lock(sr->ospf_subsys); // Unlocking OSPF subsystem
+    }
+}
 
+/**
+ * Processes PWOSPF LSU (Link State Update) packets.
+ *
+ * @param sr Pointer to the simple router instance.
+ * @param packet Pointer to the packet data.
+ * @param len Length of the packet.
+ * @param interface Name of the interface through which the packet was received.
+ * @return char Flag indicating if the routing table was updated.
+ */
+char handle_pwospf_lsu(struct sr_instance* sr,
+                       uint8_t * packet,
+                       unsigned int len,
+                       char* interface) {
+
+    // Extract Ethernet and IP headers
+    struct sr_ethernet_hdr *eth = (struct sr_ethernet_hdr*) packet;
+    struct ip *ip = (struct ip*) (packet + sizeof(struct sr_ethernet_hdr));
+    struct ospfv2_hdr *ospf_hdr = (struct ospfv2_hdr*) (packet + sizeof(struct sr_ethernet_hdr) + sizeof(struct ip));
+
+    // LSU specific headers extraction
+    struct ospfv2_lsu_hdr *lsu_hdr = (struct ospfv2_lsu_hdr*) ((uint8_t *) ospf_hdr + sizeof(struct ospfv2_hdr));
+    struct ospfv2_lsu *lsu_ad = (struct ospfv2_lsu*) ((uint8_t *) lsu_hdr + sizeof(struct ospfv2_lsu_hdr));
+
+    // Check for incomplete ARP resolution
+    int i;
+    for(i = 0; i < ETHER_ADDR_LEN; ++i) {
+        if(eth->ether_dhost[i] != 0)
+            break;
+    }
+    if(i == ETHER_ADDR_LEN) { // ARP resolution required
+        // Resolve MAC address using ARP cache
+        IP_Mac_Mapping *cache_temp = &(sr->arp_head);
+        unsigned char *haddr = findMacAddress(cache_temp, ip->ip_dst.s_addr);
+        if(haddr != NULL) {
+            memcpy(eth->ether_dhost, haddr, sizeof(eth->ether_dhost));
+            int rc = sr_send_packet(sr, packet, len, interface);
+            assert(rc == 0);
+        } else {
+            struct in_addr ip_dest;
+            ip_dest.s_addr = ip->ip_dst.s_addr;
+            printf("NO ARP CACHE ENTRY EXISTS FOR IP %s, SHOULD NOT HAPPEN.\n", inet_ntoa(ip_dest));
+        }
+        return 0;
+    }
+
+    // Normal processing of OSPF LSU packet
+    Router *router = findRouterById(&(sr->ospf_subsys->head_router), ospf_hdr->rid);
+    char flag = 0;
+
+    // Skip processing if packet is from the router itself
+    if(sr_get_interface(sr, "eth0")->ip == ospf_hdr->rid) {
+        return flag;
+    }
+
+    // Add router if it doesn't exist in the OSPF subsystem
+    if(router == NULL) {
+        router = addRouter(&(sr->ospf_subsys->head_router), ospf_hdr->rid);
+        struct sr_if *iface = sr_get_interface(sr, interface);
+        iface->neighbor_ip = ip->ip_src.s_addr;
+        iface->neighbor_rid = ospf_hdr->rid;
+        iface->up = 1;
+
+        // Update next hops in routing table
+        struct sr_rt* rt_walker = sr->routing_table;
+        while(rt_walker) {
+            if(strcmp(rt_walker->interface, iface->name) == 0)
+                rt_walker->gw.s_addr = iface->neighbor_ip;
+            rt_walker = rt_walker->next;
+        }
+        flag = 1;
+    }
+
+    // Skip outdated LSU packets
+    if(lsu_hdr->seq <= router->seq) {
+        return flag;
+    }
+
+    // Clear existing links and add new links from LSU
+    clearAllLinksFromRouter(router);
+    for(i = 0; i < lsu_hdr->num_adv; ++i) {       
+        if(lsu_ad->rid == 0)
+            appendLinkToRouter(router, lsu_ad->subnet, lsu_ad->mask, ospf_hdr->rid);
+        else
+            appendLinkToRouter(router, lsu_ad->subnet, lsu_ad->mask, lsu_ad->rid);
+
+        lsu_ad = (struct ospfv2_lsu *) ((uint8_t *) lsu_ad + sizeof(struct ospfv2_lsu));
+    }
+  
+    // Recalculate routing table if required
+    recalculate_routing_table(sr);
+
+    return flag;
+}
+
+/**
+ * Handles the reception of an OSPF Hello packet.
+ * This function is responsible for processing Hello packets in the OSPF protocol, 
+ * updating the router information, and sending updates if there's a change in the topology.
+ *
+ * @param sr Pointer to the simple router instance.
+ * @param packet Pointer to the packet data.
+ * @param len Length of the packet.
+ * @param interface Name of the interface through which the packet was received.
+ */
+void handle_pwospf_hello(struct sr_instance* sr,
+                         uint8_t * packet,
+                         unsigned int len,
+                         char* interface)
+{
+    // Extract IP and OSPF headers from the packet
+    struct ip *ip = (struct ip*) (packet + sizeof(struct sr_ethernet_hdr));
+    struct ospfv2_hdr *ospf_hdr = (struct ospfv2_hdr*) (packet + sizeof(struct sr_ethernet_hdr) + sizeof(struct ip));
+    // printf("Hello received from router: %u\n", ospf_hdr->rid);
+
+    // Find the router by ID in the OSPF subsystem
+    Router *router = findRouterById(&(sr->ospf_subsys->head_router), ospf_hdr->rid);
+
+    // If a new router is discovered
+    if(router == NULL) {
+        // Add the new router to the OSPF subsystem
+        router = addRouter(&(sr->ospf_subsys->head_router), ospf_hdr->rid);
+
+        // Update interface information with neighbor details
+        struct sr_if *iface = sr_get_interface(sr, interface);
+        iface->neighbor_ip = ip->ip_src.s_addr;
+        iface->neighbor_rid = ospf_hdr->rid;
+        iface->up = 1;
+        // printf("Hello received from router: %u\n", iface->neighbor_ip);
+
+        // Update the next hop in the routing table if necessary
+        struct sr_rt* rt_walker = sr->routing_table;
+        while(rt_walker) {
+            if(strcmp(rt_walker->interface, iface->name) == 0) {
+                rt_walker->gw.s_addr = iface->neighbor_ip;
+            }
+            rt_walker = rt_walker->next;
+        }
+        // Send updates due to topology change
+        broadcast_topology_updates(sr);
+    } else {
+        // Update the timestamp of the existing router
+        updateTime(router);
+    }
+}
 /*--------------------------------------------------------------------- 
  * Method: sr_init(void)
  * Scope:  Global
@@ -59,11 +217,11 @@ IP_Mac_Mapping_Buffer buf_head;
  *---------------------------------------------------------------------*/
 void sr_init(struct sr_instance* sr)
 {
-/* REQUIRES */
-assert(sr);
+    /* REQUIRES */
+    assert(sr);
 
-arp_head.next = NULL;
-buf_head.next = NULL;
+    sr->arp_head.next = NULL;
+    sr->buf_head.next = NULL;
 } /* -- sr_init -- */
 
 
@@ -84,9 +242,9 @@ buf_head.next = NULL;
  *
  *---------------------------------------------------------------------*/
 void sr_handlepacket(struct sr_instance* sr,
-uint8_t * packet/* lent */,
-unsigned int len,
-char* interface/* lent */)
+                        uint8_t * packet/* lent */,
+                        unsigned int len,
+                        char* interface/* lent */)
 {
     /* REQUIRES */
     assert(sr);
@@ -127,9 +285,8 @@ void transfer_arp_packet(struct sr_instance* sr,
     struct sr_arphdr *arpHeader = (struct sr_arphdr*) (packet + sizeof(struct sr_ethernet_hdr));
 
     // Set Ethernet header fields.
-    memset(ethernetHeader->ether_dhost, 0xFF, ETHER_ADDR_LEN);  // Broadcast address.
+    memset(ethernetHeader->ether_dhost, 0xFF, ETHER_ADDR_LEN); 
     ethernetHeader->ether_type = htons(ETHERTYPE_ARP);
-
     // Set ARP header fields.
     arpHeader->ar_hrd = htons(ARPHDR_ETHER);
     arpHeader->ar_pro = htons(ETHERTYPE_IP);
@@ -138,17 +295,17 @@ void transfer_arp_packet(struct sr_instance* sr,
     arpHeader->ar_op = htons(ARP_REQUEST);
 
     // Find the interface to use for sending the ARP request.
-    struct sr_if* interfaceWalker = sr->if_list;
-    while(interfaceWalker)
+    struct sr_if* if_walker = sr->if_list;
+    while(if_walker)
     {
-        if(strncmp(interface, interfaceWalker->name, sizeof(interfaceWalker->name)) == 0)
+        if(strncmp(interface, if_walker->name, sizeof(if_walker->name)) == 0)
             break;
-        interfaceWalker = interfaceWalker->next;
+        if_walker = if_walker->next;
     }
 
     // Set source MAC and IP addresses in the ARP header.
-    memcpy(ethernetHeader->ether_shost, interfaceWalker->addr, sizeof(ethernetHeader->ether_shost));
-    arpHeader->ar_sip = interfaceWalker->ip;
+    memcpy(ethernetHeader->ether_shost, if_walker->addr, sizeof(ethernetHeader->ether_shost));
+    arpHeader->ar_sip = if_walker->ip;
     memcpy(arpHeader->ar_sha, ethernetHeader->ether_shost, sizeof(arpHeader->ar_sha));
 
     // Set target IP address in the ARP header.
@@ -187,6 +344,7 @@ void process_arp_packet(struct sr_instance* sr,
 
     // Handle ARP request.
     if(arpHeader->ar_op == ntohs(1)) {
+         struct sr_if* if_walker = 0;
         // Ensure the interface list is not empty.
         if(sr->if_list == 0)
         {
@@ -195,14 +353,14 @@ void process_arp_packet(struct sr_instance* sr,
         }
 
         // Find the interface that matches the target IP of the ARP request.
-        struct sr_if* interfaceWalker;
-        for(interfaceWalker = sr->if_list; interfaceWalker != NULL; interfaceWalker = interfaceWalker->next)
+        if_walker = sr->if_list;
+        while(if_walker != NULL)
         {
             // If interface found, prepare ARP reply.
-            if(interfaceWalker->ip == arpHeader->ar_tip) {
+            if(if_walker->ip == arpHeader->ar_tip) {
                 arpHeader->ar_op = ntohs(2);
                 memcpy(arpHeader->ar_tha, arpHeader->ar_sha, sizeof(arpHeader->ar_tha));
-                memcpy(arpHeader->ar_sha, interfaceWalker->addr, sizeof(arpHeader->ar_sha));
+                memcpy(arpHeader->ar_sha, if_walker->addr, sizeof(arpHeader->ar_sha));
                 uint32_t temp = arpHeader->ar_tip;
                 arpHeader->ar_tip = arpHeader->ar_sip;
                 arpHeader->ar_sip = temp;
@@ -212,29 +370,32 @@ void process_arp_packet(struct sr_instance* sr,
                 assert(rc == 0);
                 break;
             }
+            if_walker = if_walker->next;
         }
 
-        if(interfaceWalker == NULL) {
-            printf("No matching interface found for ARP request.\n");
+        if(if_walker->next == NULL) {
+            struct in_addr temp;
+            temp.s_addr = arpHeader->ar_sip;
+            temp.s_addr = arpHeader->ar_tip;
         }
     } 
     // Handle ARP reply.
     else if (arpHeader->ar_op == ntohs(2)) {
         // Find buffer entry for the source IP of the ARP reply.
-        IP_Mac_Mapping_Buffer *currentBuffer = find_buffer_by_ip(&buf_head, arpHeader->ar_sip);
+        IP_Mac_Mapping_Buffer *currentBuffer = find_buffer_by_ip(&(sr->buf_head), arpHeader->ar_sip);
 
         // If no buffer entry found, ignore the ARP reply.
         if(currentBuffer == NULL)
             return;
 
         // Add the sender's IP and MAC address to the ARP cache.
-        addMapping(&arp_head, arpHeader->ar_sip, arpHeader->ar_sha);
+        addMapping(&(sr->arp_head), arpHeader->ar_sip, arpHeader->ar_sha);
 
         // Process buffered packets waiting for this ARP reply.
         unsigned int bufferedPacketLen = 0;
         uint8_t *bufferedPacket = dequeue_packet(currentBuffer, &bufferedPacketLen);
         while(bufferedPacket != NULL) {
-            struct ip *ipHeader = (struct ip*) (bufferedPacket + sizeof(struct sr_ethernet_hdr));
+            //struct ip *ipHeader = (struct ip*) (bufferedPacket + sizeof(struct sr_ethernet_hdr));
             sr_handlepacket(sr, bufferedPacket, bufferedPacketLen, interface);
 
             free(bufferedPacket);
@@ -333,7 +494,9 @@ void process_ip_packet(
 ) {
     // Extract Ethernet and IP headers from the packet data.
     struct sr_ethernet_hdr *ethernet_header = (struct sr_ethernet_hdr*) packet_data;
+
     struct ip *ip_header = (struct ip*) (packet_data + sizeof(struct sr_ethernet_hdr));
+
     uint32_t destination_ip = ip_header->ip_dst.s_addr;
     char use_default_route = 0;
 
@@ -353,37 +516,43 @@ void process_ip_packet(
         return;
     }
 
-    // Check if the destination IP matches any of the router's interfaces.
-    struct sr_if* interface_iterator = 0;
-    interface_iterator = sr->if_list;
-    while(interface_iterator) {
-	//DebugMAC(interface_iterator->addr);
-        if(interface_iterator->ip == destination_ip) {
-            process_icmp_packet_packet(sr, packet_data, packet_length, interface_name);
-            return;
-        }
-        interface_iterator = interface_iterator->next;
-    }
-
-    // Find a route for the destination IP.
-    struct sr_rt* routing_iterator = NULL, *default_route = NULL, *match = NULL;
-    if(sr->routing_table == 0) {
-        printf(" *warning* Routing table empty \n");
+    if(ip_header->ip_p == IPROTO_OSPF) {
+        handle_pwospf(sr, packet_data, packet_length, interface_name); 
         return;
     }
 
-    routing_iterator = sr->routing_table;
-    while(routing_iterator) {
-        if(routing_iterator->dest.s_addr == 0) {
-            default_route = routing_iterator;
-        } else if((destination_ip & routing_iterator->mask.s_addr) == 
-                  (routing_iterator->dest.s_addr & routing_iterator->mask.s_addr)) {
-           if(match == NULL || routing_iterator->mask.s_addr > match->mask.s_addr) {
-			   match = routing_iterator;
+    // Check if the destination IP matches any of the router's interfaces.
+    struct sr_if* if_walker = 0;
+    if_walker = sr->if_list;
+    while(if_walker) {
+	//DebugMAC(interface_iterator->addr);
+        if(if_walker->ip == destination_ip) {
+            process_icmp_packet_packet(sr, packet_data, packet_length, interface_name);
+            return;
+        }
+        if_walker = if_walker->next;
+    }
+
+    (sr->ospf_subsys);
+    struct sr_rt* rt_walker = NULL, *default_route = NULL, *match = NULL;
+    if(sr->routing_table == 0) {
+        release_pwospf_lock(sr->ospf_subsys);
+        return;
+    }
+
+    rt_walker = sr->routing_table;
+    while(rt_walker) {
+        if(rt_walker->dest.s_addr == 0) {
+            default_route = rt_walker;
+        } else if((destination_ip & rt_walker->mask.s_addr) == 
+                  (rt_walker->dest.s_addr & rt_walker->mask.s_addr)) {
+           if(match == NULL || rt_walker->mask.s_addr > match->mask.s_addr) {
+			   match = rt_walker;
 			   }
         }
-        routing_iterator = routing_iterator->next;
+        rt_walker = rt_walker->next;
     }
+    release_pwospf_lock(sr->ospf_subsys);
 
     // Use the default route if no specific route is found.
     if(match == NULL && default_route != NULL) {
@@ -398,7 +567,7 @@ void process_ip_packet(
     }
 
     // Check ARP cache for MAC address.
-    IP_Mac_Mapping *arp_cache_iterator = &arp_head;
+    IP_Mac_Mapping *arp_cache_iterator =&(sr->arp_head);
     while(arp_cache_iterator != NULL) {
         unsigned char *mac_address = findMacAddress(arp_cache_iterator, destination_ip);
         if(mac_address != NULL) {
@@ -429,10 +598,10 @@ void process_ip_packet(
 
     // If MAC address is not in ARP cache, buffer the packet and send an ARP request.
     if(arp_cache_iterator == NULL) {
-        IP_Mac_Mapping_Buffer *buffer_check = find_buffer_by_ip(&buf_head, destination_ip);
+        IP_Mac_Mapping_Buffer *buffer_check = find_buffer_by_ip(&(sr->buf_head), destination_ip);
 
         if(buffer_check == NULL) {
-            buffer_check = insert_new_buffer_entry(&buf_head, destination_ip);
+            buffer_check = insert_new_buffer_entry(&(sr->buf_head), destination_ip);
             enqueue_packet(buffer_check, packet_data, packet_length);
             if(use_default_route || match->gw.s_addr != 0) {
                 transfer_arp_packet(sr, packet_data, match->interface, destination_ip);

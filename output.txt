@@ -1,0 +1,859 @@
+ase) ugola@ugola ~ % ssh ugola@lectura.cs.arizona.edu
+Warning: Permanently added 'lectura.cs.arizona.edu' (ED25519) to the list of known hosts.
+ugola@lectura.cs.arizona.edu's password:
+
+  System information as of Sun 03 Dec 2023 05:09:12 PM MST
+
+  System load:  3.58              Users logged in:        34
+  Usage of /:   54.7% of 9.75GB   IPv4 address for ens18: 192.12.69.186
+  Memory usage: 40%               IPv4 address for ens19: 192.168.201.186
+  Swap usage:   1%                IPv4 address for ens20: 10.192.144.186
+  Processes:    1124
+Welcome to:
+ _              _
+| |    ___  ___| |_ _   _ _ __ __ _
+| |   / _ \/ __| __| | | | '__/ _` |
+| |__|  __/ (__| |_| |_| | | | (_| |
+|_____\___|\___|\__|\__,_|_|  \__,_|
+      (lectura.cs.arizona.edu)
+
+Use not authorized by the University of Arizona
+Department of Computer Science is prohibited
+
+All connections are logged and monitored.
+
+For help or to report issue please visit the CS Lab Helpdesk
+https://helpdesk.cs.arizona.edu
+
+NOTICE: If using TMUX please be aware to manage your amount of open sessions.
+TMUX Sessions that are idle for more than 5 days will be terminated.
+If you require running processes unattended please make a request to the helpdesk.
+
+Change / Issue log:
+09/10/2023 12:00-13:00MST - Required maintenance was performed to Lectura. All clear.
+
+Last login: Sun Dec  3 17:09:06 2023 from 10.134.130.246
+ugola@lectura:~$ cd bhav/top117_NEW/CSC525_Router/
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$ ./test_ping.sh
+Pinging 172.29.5.17
+PING 172.29.5.17 (172.29.5.17) 56(84) bytes of data.
+64 bytes from 172.29.5.17: icmp_seq=1 ttl=62 time=0.391 ms
+64 bytes from 172.29.5.17: icmp_seq=2 ttl=62 time=0.386 ms
+64 bytes from 172.29.5.17: icmp_seq=3 ttl=62 time=0.292 ms
+64 bytes from 172.29.5.17: icmp_seq=4 ttl=62 time=0.314 ms
+64 bytes from 172.29.5.17: icmp_seq=5 ttl=62 time=0.306 ms
+
+--- 172.29.5.17 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4073ms
+rtt min/avg/max/mdev = 0.292/0.337/0.391/0.042 ms
+Pinging 172.29.5.18
+PING 172.29.5.18 (172.29.5.18) 56(84) bytes of data.
+64 bytes from 172.29.5.18: icmp_seq=1 ttl=57 time=2.95 ms
+64 bytes from 172.29.5.18: icmp_seq=2 ttl=57 time=1.92 ms
+64 bytes from 172.29.5.18: icmp_seq=3 ttl=57 time=1.72 ms
+64 bytes from 172.29.5.18: icmp_seq=4 ttl=57 time=1.62 ms
+64 bytes from 172.29.5.18: icmp_seq=5 ttl=57 time=1.46 ms
+
+--- 172.29.5.18 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4007ms
+rtt min/avg/max/mdev = 1.462/1.934/2.947/0.527 ms
+Pinging 172.29.5.20
+PING 172.29.5.20 (172.29.5.20) 56(84) bytes of data.
+64 bytes from 172.29.5.20: icmp_seq=1 ttl=57 time=1.52 ms
+64 bytes from 172.29.5.20: icmp_seq=2 ttl=57 time=1.54 ms
+64 bytes from 172.29.5.20: icmp_seq=3 ttl=57 time=1.66 ms
+64 bytes from 172.29.5.20: icmp_seq=4 ttl=57 time=1.98 ms
+64 bytes from 172.29.5.20: icmp_seq=5 ttl=57 time=1.68 ms
+
+--- 172.29.5.20 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4006ms
+rtt min/avg/max/mdev = 1.524/1.678/1.984/0.164 ms
+Pinging 172.29.5.24
+PING 172.29.5.24 (172.29.5.24) 56(84) bytes of data.
+64 bytes from 172.29.5.24: icmp_seq=1 ttl=57 time=1.44 ms
+64 bytes from 172.29.5.24: icmp_seq=2 ttl=57 time=1.72 ms
+64 bytes from 172.29.5.24: icmp_seq=3 ttl=57 time=1.69 ms
+64 bytes from 172.29.5.24: icmp_seq=4 ttl=57 time=1.48 ms
+64 bytes from 172.29.5.24: icmp_seq=5 ttl=57 time=1.62 ms
+
+--- 172.29.5.24 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4007ms
+rtt min/avg/max/mdev = 1.436/1.587/1.723/0.113 ms
+Pinging 172.29.5.21
+PING 172.29.5.21 (172.29.5.21) 56(84) bytes of data.
+64 bytes from 172.29.5.21: icmp_seq=1 ttl=55 time=3.42 ms
+64 bytes from 172.29.5.21: icmp_seq=2 ttl=55 time=3.71 ms
+64 bytes from 172.29.5.21: icmp_seq=3 ttl=55 time=3.31 ms
+64 bytes from 172.29.5.21: icmp_seq=4 ttl=55 time=4.01 ms
+64 bytes from 172.29.5.21: icmp_seq=5 ttl=55 time=3.77 ms
+
+--- 172.29.5.21 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4006ms
+rtt min/avg/max/mdev = 3.308/3.643/4.009/0.252 ms
+Pinging 172.29.5.22
+PING 172.29.5.22 (172.29.5.22) 56(84) bytes of data.
+64 bytes from 172.29.5.22: icmp_seq=1 ttl=55 time=3.44 ms
+64 bytes from 172.29.5.22: icmp_seq=2 ttl=55 time=3.96 ms
+64 bytes from 172.29.5.22: icmp_seq=3 ttl=55 time=3.87 ms
+64 bytes from 172.29.5.22: icmp_seq=4 ttl=55 time=3.44 ms
+64 bytes from 172.29.5.22: icmp_seq=5 ttl=55 time=3.58 ms
+
+--- 172.29.5.22 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4007ms
+rtt min/avg/max/mdev = 3.437/3.659/3.963/0.218 ms
+Pinging 172.29.5.29
+PING 172.29.5.29 (172.29.5.29) 56(84) bytes of data.
+64 bytes from 172.29.5.29: icmp_seq=1 ttl=55 time=3.39 ms
+64 bytes from 172.29.5.29: icmp_seq=2 ttl=55 time=4.14 ms
+64 bytes from 172.29.5.29: icmp_seq=3 ttl=55 time=3.78 ms
+64 bytes from 172.29.5.29: icmp_seq=4 ttl=55 time=4.05 ms
+64 bytes from 172.29.5.29: icmp_seq=5 ttl=55 time=3.42 ms
+
+--- 172.29.5.29 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4006ms
+rtt min/avg/max/mdev = 3.390/3.755/4.135/0.309 ms
+Pinging 172.29.5.25
+PING 172.29.5.25 (172.29.5.25) 56(84) bytes of data.
+64 bytes from 172.29.5.25: icmp_seq=1 ttl=55 time=3.43 ms
+64 bytes from 172.29.5.25: icmp_seq=2 ttl=55 time=3.91 ms
+64 bytes from 172.29.5.25: icmp_seq=3 ttl=55 time=4.16 ms
+64 bytes from 172.29.5.25: icmp_seq=4 ttl=55 time=3.80 ms
+64 bytes from 172.29.5.25: icmp_seq=5 ttl=55 time=4.27 ms
+
+--- 172.29.5.25 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4006ms
+rtt min/avg/max/mdev = 3.428/3.913/4.271/0.296 ms
+Pinging 172.29.5.26
+PING 172.29.5.26 (172.29.5.26) 56(84) bytes of data.
+64 bytes from 172.29.5.26: icmp_seq=1 ttl=55 time=4.22 ms
+64 bytes from 172.29.5.26: icmp_seq=2 ttl=55 time=4.22 ms
+64 bytes from 172.29.5.26: icmp_seq=3 ttl=55 time=4.36 ms
+64 bytes from 172.29.5.26: icmp_seq=4 ttl=55 time=3.98 ms
+64 bytes from 172.29.5.26: icmp_seq=5 ttl=55 time=4.35 ms
+
+--- 172.29.5.26 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4005ms
+rtt min/avg/max/mdev = 3.979/4.225/4.357/0.137 ms
+Pinging 172.29.5.30
+PING 172.29.5.30 (172.29.5.30) 56(84) bytes of data.
+64 bytes from 172.29.5.30: icmp_seq=1 ttl=54 time=4.56 ms
+64 bytes from 172.29.5.30: icmp_seq=2 ttl=54 time=5.45 ms
+64 bytes from 172.29.5.30: icmp_seq=3 ttl=54 time=5.20 ms
+64 bytes from 172.29.5.30: icmp_seq=4 ttl=54 time=5.05 ms
+64 bytes from 172.29.5.30: icmp_seq=5 ttl=54 time=5.27 ms
+
+--- 172.29.5.30 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4006ms
+rtt min/avg/max/mdev = 4.557/5.107/5.450/0.303 ms
+Pinging 172.29.5.23
+PING 172.29.5.23 (172.29.5.23) 56(84) bytes of data.
+64 bytes from 172.29.5.23: icmp_seq=1 ttl=59 time=6.25 ms
+64 bytes from 172.29.5.23: icmp_seq=2 ttl=59 time=5.04 ms
+64 bytes from 172.29.5.23: icmp_seq=3 ttl=59 time=5.35 ms
+64 bytes from 172.29.5.23: icmp_seq=4 ttl=59 time=4.63 ms
+64 bytes from 172.29.5.23: icmp_seq=5 ttl=59 time=5.35 ms
+
+--- 172.29.5.23 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4006ms
+rtt min/avg/max/mdev = 4.634/5.324/6.253/0.533 ms
+Pinging 172.29.5.27
+PING 172.29.5.27 (172.29.5.27) 56(84) bytes of data.
+64 bytes from 172.29.5.27: icmp_seq=1 ttl=59 time=6.16 ms
+64 bytes from 172.29.5.27: icmp_seq=2 ttl=59 time=4.97 ms
+64 bytes from 172.29.5.27: icmp_seq=3 ttl=59 time=4.89 ms
+64 bytes from 172.29.5.27: icmp_seq=4 ttl=59 time=5.06 ms
+64 bytes from 172.29.5.27: icmp_seq=5 ttl=59 time=4.87 ms
+
+--- 172.29.5.27 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4006ms
+rtt min/avg/max/mdev = 4.873/5.189/6.159/0.489 ms
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$ ./test_download.sh
+Fetch from server 172.29.5.23
+--2023-12-03 17:13:07--  http://172.29.5.23:16280/
+Connecting to 172.29.5.23:16280... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 2928 (2.9K) [application/octet-stream]
+Saving to: ‘index.html’
+
+index.html                        100%[==========================================================>]   2.86K  --.-KB/s    in 0s
+
+2023-12-03 17:13:07 (244 MB/s) - ‘index.html’ saved [2928/2928]
+
+Fetch from server 172.29.5.27
+--2023-12-03 17:13:09--  http://172.29.5.27:16280/
+Connecting to 172.29.5.27:16280... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 2928 (2.9K) [application/octet-stream]
+Saving to: ‘index.html.1’
+
+index.html.1                      100%[==========================================================>]   2.86K  --.-KB/s    in 0s
+
+2023-12-03 17:13:09 (354 MB/s) - ‘index.html.1’ saved [2928/2928]
+
+Fetch 64MB from server 172.29.5.23
+--2023-12-03 17:13:11--  http://172.29.5.23:16280/64MB.bin
+Connecting to 172.29.5.23:16280... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 67108864 (64M) [application/octet-stream]
+Saving to: ‘64MB.bin’
+
+64MB.bin                          100%[==========================================================>]  64.00M  2.13MB/s    in 33s
+
+2023-12-03 17:13:44 (1.95 MB/s) - ‘64MB.bin’ saved [67108864/67108864]
+
+Fetch 64MB from server 172.29.5.27
+--2023-12-03 17:14:04--  http://172.29.5.27:16280/64MB.bin
+Connecting to 172.29.5.27:16280... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 67108864 (64M) [application/octet-stream]
+Saving to: ‘64MB.bin.1’
+
+64MB.bin.1                        100%[==========================================================>]  64.00M  1.88MB/s    in 33s
+
+2023-12-03 17:14:36 (1.96 MB/s) - ‘64MB.bin.1’ saved [67108864/67108864]
+
+Test Completed
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$ ./vnltopo117.sh vhost1 setlossy eth1 100
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$ ./vnltopo117.sh vhost2 setlossy eth0 100
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$ ./test_download.sh
+-bash: fork: retry: Resource temporarily unavailable
+Fetch from server 172.29.5.23
+--2023-12-03 17:17:27--  http://172.29.5.23:16280/
+Connecting to 172.29.5.23:16280... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 2928 (2.9K) [application/octet-stream]
+Saving to: ‘index.html.2’
+
+index.html.2                      100%[==========================================================>]   2.86K  --.-KB/s    in 0s
+
+2023-12-03 17:17:27 (254 MB/s) - ‘index.html.2’ saved [2928/2928]
+
+Fetch from server 172.29.5.27
+--2023-12-03 17:17:29--  http://172.29.5.27:16280/
+Connecting to 172.29.5.27:16280... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 2928 (2.9K) [application/octet-stream]
+Saving to: ‘index.html.3’
+
+index.html.3                      100%[==========================================================>]   2.86K  --.-KB/s    in 0s
+
+2023-12-03 17:17:29 (351 MB/s) - ‘index.html.3’ saved [2928/2928]
+
+Fetch 64MB from server 172.29.5.23
+--2023-12-03 17:17:31--  http://172.29.5.23:16280/64MB.bin
+Connecting to 172.29.5.23:16280... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 67108864 (64M) [application/octet-stream]
+Saving to: ‘64MB.bin.2’
+
+64MB.bin.2                        100%[==========================================================>]  64.00M  1.68MB/s    in 39s
+
+2023-12-03 17:18:09 (1.65 MB/s) - ‘64MB.bin.2’ saved [67108864/67108864]
+
+Fetch 64MB from server 172.29.5.27
+--2023-12-03 17:18:29--  http://172.29.5.27:16280/64MB.bin
+Connecting to 172.29.5.27:16280... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 67108864 (64M) [application/octet-stream]
+Saving to: ‘64MB.bin.3’
+
+64MB.bin.3                        100%[==========================================================>]  64.00M  1.97MB/s    in 32s
+
+2023-12-03 17:19:02 (1.98 MB/s) - ‘64MB.bin.3’ saved [67108864/67108864]
+
+Test Completed
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$ ./test_ping.sh
+Pinging 172.29.5.17
+PING 172.29.5.17 (172.29.5.17) 56(84) bytes of data.
+64 bytes from 172.29.5.17: icmp_seq=1 ttl=62 time=0.373 ms
+64 bytes from 172.29.5.17: icmp_seq=2 ttl=62 time=0.318 ms
+64 bytes from 172.29.5.17: icmp_seq=3 ttl=62 time=0.502 ms
+64 bytes from 172.29.5.17: icmp_seq=4 ttl=62 time=0.307 ms
+64 bytes from 172.29.5.17: icmp_seq=5 ttl=62 time=0.399 ms
+
+--- 172.29.5.17 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4079ms
+rtt min/avg/max/mdev = 0.307/0.379/0.502/0.069 ms
+Pinging 172.29.5.18
+PING 172.29.5.18 (172.29.5.18) 56(84) bytes of data.
+64 bytes from 172.29.5.18: icmp_seq=1 ttl=57 time=1.73 ms
+64 bytes from 172.29.5.18: icmp_seq=2 ttl=57 time=1.87 ms
+64 bytes from 172.29.5.18: icmp_seq=3 ttl=57 time=1.68 ms
+64 bytes from 172.29.5.18: icmp_seq=4 ttl=57 time=1.69 ms
+64 bytes from 172.29.5.18: icmp_seq=5 ttl=57 time=1.71 ms
+
+--- 172.29.5.18 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4154ms
+rtt min/avg/max/mdev = 1.684/1.738/1.873/0.069 ms
+Pinging 172.29.5.20
+PING 172.29.5.20 (172.29.5.20) 56(84) bytes of data.
+64 bytes from 172.29.5.20: icmp_seq=1 ttl=57 time=1.44 ms
+64 bytes from 172.29.5.20: icmp_seq=2 ttl=57 time=1.64 ms
+64 bytes from 172.29.5.20: icmp_seq=3 ttl=57 time=1.67 ms
+64 bytes from 172.29.5.20: icmp_seq=4 ttl=57 time=1.82 ms
+64 bytes from 172.29.5.20: icmp_seq=5 ttl=57 time=1.66 ms
+
+--- 172.29.5.20 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4007ms
+rtt min/avg/max/mdev = 1.435/1.643/1.816/0.121 ms
+Pinging 172.29.5.24
+PING 172.29.5.24 (172.29.5.24) 56(84) bytes of data.
+64 bytes from 172.29.5.24: icmp_seq=1 ttl=57 time=1.41 ms
+64 bytes from 172.29.5.24: icmp_seq=2 ttl=57 time=1.78 ms
+64 bytes from 172.29.5.24: icmp_seq=3 ttl=57 time=1.59 ms
+64 bytes from 172.29.5.24: icmp_seq=4 ttl=57 time=1.96 ms
+64 bytes from 172.29.5.24: icmp_seq=5 ttl=57 time=1.74 ms
+
+--- 172.29.5.24 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4006ms
+rtt min/avg/max/mdev = 1.409/1.695/1.964/0.185 ms
+Pinging 172.29.5.21
+PING 172.29.5.21 (172.29.5.21) 56(84) bytes of data.
+
+--- 172.29.5.21 ping statistics ---
+5 packets transmitted, 0 received, 100% packet loss, time 4073ms
+
+Pinging 172.29.5.22
+PING 172.29.5.22 (172.29.5.22) 56(84) bytes of data.
+64 bytes from 172.29.5.22: icmp_seq=1 ttl=53 time=5.87 ms
+64 bytes from 172.29.5.22: icmp_seq=2 ttl=53 time=5.69 ms
+64 bytes from 172.29.5.22: icmp_seq=3 ttl=53 time=5.98 ms
+64 bytes from 172.29.5.22: icmp_seq=4 ttl=53 time=5.69 ms
+64 bytes from 172.29.5.22: icmp_seq=5 ttl=53 time=5.36 ms
+
+--- 172.29.5.22 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4007ms
+rtt min/avg/max/mdev = 5.364/5.718/5.979/0.209 ms
+Pinging 172.29.5.29
+PING 172.29.5.29 (172.29.5.29) 56(84) bytes of data.
+64 bytes from 172.29.5.29: icmp_seq=1 ttl=53 time=5.03 ms
+64 bytes from 172.29.5.29: icmp_seq=2 ttl=53 time=5.83 ms
+64 bytes from 172.29.5.29: icmp_seq=3 ttl=53 time=5.26 ms
+64 bytes from 172.29.5.29: icmp_seq=4 ttl=53 time=4.95 ms
+64 bytes from 172.29.5.29: icmp_seq=5 ttl=53 time=5.33 ms
+
+--- 172.29.5.29 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4005ms
+rtt min/avg/max/mdev = 4.952/5.280/5.828/0.307 ms
+Pinging 172.29.5.25
+PING 172.29.5.25 (172.29.5.25) 56(84) bytes of data.
+64 bytes from 172.29.5.25: icmp_seq=1 ttl=55 time=3.22 ms
+64 bytes from 172.29.5.25: icmp_seq=2 ttl=55 time=3.59 ms
+64 bytes from 172.29.5.25: icmp_seq=3 ttl=55 time=3.68 ms
+64 bytes from 172.29.5.25: icmp_seq=4 ttl=55 time=3.50 ms
+64 bytes from 172.29.5.25: icmp_seq=5 ttl=55 time=3.53 ms
+
+--- 172.29.5.25 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4007ms
+rtt min/avg/max/mdev = 3.217/3.503/3.684/0.156 ms
+Pinging 172.29.5.26
+PING 172.29.5.26 (172.29.5.26) 56(84) bytes of data.
+64 bytes from 172.29.5.26: icmp_seq=1 ttl=55 time=3.17 ms
+64 bytes from 172.29.5.26: icmp_seq=2 ttl=55 time=4.02 ms
+64 bytes from 172.29.5.26: icmp_seq=3 ttl=55 time=3.72 ms
+64 bytes from 172.29.5.26: icmp_seq=4 ttl=55 time=3.99 ms
+64 bytes from 172.29.5.26: icmp_seq=5 ttl=55 time=3.61 ms
+
+--- 172.29.5.26 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4005ms
+rtt min/avg/max/mdev = 3.169/3.701/4.017/0.307 ms
+Pinging 172.29.5.30
+PING 172.29.5.30 (172.29.5.30) 56(84) bytes of data.
+64 bytes from 172.29.5.30: icmp_seq=1 ttl=55 time=3.26 ms
+64 bytes from 172.29.5.30: icmp_seq=2 ttl=55 time=3.86 ms
+64 bytes from 172.29.5.30: icmp_seq=3 ttl=55 time=3.84 ms
+64 bytes from 172.29.5.30: icmp_seq=4 ttl=55 time=3.88 ms
+64 bytes from 172.29.5.30: icmp_seq=5 ttl=55 time=3.85 ms
+
+--- 172.29.5.30 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4007ms
+rtt min/avg/max/mdev = 3.263/3.739/3.878/0.238 ms
+Pinging 172.29.5.23
+PING 172.29.5.23 (172.29.5.23) 56(84) bytes of data.
+64 bytes from 172.29.5.23: icmp_seq=1 ttl=58 time=6.30 ms
+64 bytes from 172.29.5.23: icmp_seq=2 ttl=58 time=6.60 ms
+64 bytes from 172.29.5.23: icmp_seq=3 ttl=58 time=6.94 ms
+64 bytes from 172.29.5.23: icmp_seq=4 ttl=58 time=5.89 ms
+64 bytes from 172.29.5.23: icmp_seq=5 ttl=58 time=6.99 ms
+
+--- 172.29.5.23 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4006ms
+rtt min/avg/max/mdev = 5.889/6.543/6.992/0.411 ms
+Pinging 172.29.5.27
+PING 172.29.5.27 (172.29.5.27) 56(84) bytes of data.
+64 bytes from 172.29.5.27: icmp_seq=1 ttl=59 time=4.55 ms
+64 bytes from 172.29.5.27: icmp_seq=2 ttl=59 time=4.85 ms
+64 bytes from 172.29.5.27: icmp_seq=3 ttl=59 time=4.96 ms
+64 bytes from 172.29.5.27: icmp_seq=4 ttl=59 time=4.90 ms
+64 bytes from 172.29.5.27: icmp_seq=5 ttl=59 time=4.55 ms
+
+--- 172.29.5.27 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4007ms
+rtt min/avg/max/mdev = 4.546/4.760/4.956/0.176 ms
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$ ./vnltopo117.sh vhost1 setlossy eth1 0
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$ ./vnltopo117.sh vhost2 setlossy eth0 0
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$ ./vnltopo117.sh vhost1 setlossy eth2 100
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$ ./vnltopo117.sh vhost3 setlossy eth0 100
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$ ./test_ping.sh
+Pinging 172.29.5.17
+PING 172.29.5.17 (172.29.5.17) 56(84) bytes of data.
+64 bytes from 172.29.5.17: icmp_seq=1 ttl=62 time=0.411 ms
+64 bytes from 172.29.5.17: icmp_seq=2 ttl=62 time=0.378 ms
+64 bytes from 172.29.5.17: icmp_seq=3 ttl=62 time=0.296 ms
+64 bytes from 172.29.5.17: icmp_seq=4 ttl=62 time=0.292 ms
+64 bytes from 172.29.5.17: icmp_seq=5 ttl=62 time=0.326 ms
+
+--- 172.29.5.17 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4082ms
+rtt min/avg/max/mdev = 0.292/0.340/0.411/0.046 ms
+Pinging 172.29.5.18
+PING 172.29.5.18 (172.29.5.18) 56(84) bytes of data.
+64 bytes from 172.29.5.18: icmp_seq=1 ttl=57 time=1.48 ms
+64 bytes from 172.29.5.18: icmp_seq=2 ttl=57 time=1.83 ms
+64 bytes from 172.29.5.18: icmp_seq=3 ttl=57 time=1.61 ms
+64 bytes from 172.29.5.18: icmp_seq=4 ttl=57 time=1.79 ms
+64 bytes from 172.29.5.18: icmp_seq=5 ttl=57 time=1.72 ms
+
+--- 172.29.5.18 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4007ms
+rtt min/avg/max/mdev = 1.481/1.688/1.831/0.127 ms
+Pinging 172.29.5.20
+PING 172.29.5.20 (172.29.5.20) 56(84) bytes of data.
+64 bytes from 172.29.5.20: icmp_seq=1 ttl=57 time=1.72 ms
+64 bytes from 172.29.5.20: icmp_seq=2 ttl=57 time=1.60 ms
+64 bytes from 172.29.5.20: icmp_seq=3 ttl=57 time=1.93 ms
+64 bytes from 172.29.5.20: icmp_seq=4 ttl=57 time=2.10 ms
+64 bytes from 172.29.5.20: icmp_seq=5 ttl=57 time=1.89 ms
+
+--- 172.29.5.20 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4006ms
+rtt min/avg/max/mdev = 1.598/1.847/2.097/0.173 ms
+Pinging 172.29.5.24
+PING 172.29.5.24 (172.29.5.24) 56(84) bytes of data.
+64 bytes from 172.29.5.24: icmp_seq=1 ttl=57 time=1.62 ms
+64 bytes from 172.29.5.24: icmp_seq=2 ttl=57 time=1.84 ms
+64 bytes from 172.29.5.24: icmp_seq=3 ttl=57 time=1.86 ms
+64 bytes from 172.29.5.24: icmp_seq=4 ttl=57 time=1.86 ms
+64 bytes from 172.29.5.24: icmp_seq=5 ttl=57 time=1.70 ms
+
+--- 172.29.5.24 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4008ms
+rtt min/avg/max/mdev = 1.621/1.775/1.862/0.096 ms
+Pinging 172.29.5.21
+PING 172.29.5.21 (172.29.5.21) 56(84) bytes of data.
+64 bytes from 172.29.5.21: icmp_seq=1 ttl=55 time=3.58 ms
+64 bytes from 172.29.5.21: icmp_seq=2 ttl=55 time=4.12 ms
+64 bytes from 172.29.5.21: icmp_seq=3 ttl=55 time=3.95 ms
+64 bytes from 172.29.5.21: icmp_seq=4 ttl=55 time=3.79 ms
+64 bytes from 172.29.5.21: icmp_seq=5 ttl=55 time=4.02 ms
+
+--- 172.29.5.21 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4006ms
+rtt min/avg/max/mdev = 3.575/3.888/4.116/0.189 ms
+Pinging 172.29.5.22
+PING 172.29.5.22 (172.29.5.22) 56(84) bytes of data.
+64 bytes from 172.29.5.22: icmp_seq=1 ttl=55 time=3.77 ms
+64 bytes from 172.29.5.22: icmp_seq=2 ttl=55 time=4.03 ms
+64 bytes from 172.29.5.22: icmp_seq=3 ttl=55 time=3.62 ms
+64 bytes from 172.29.5.22: icmp_seq=4 ttl=55 time=3.65 ms
+64 bytes from 172.29.5.22: icmp_seq=5 ttl=55 time=3.84 ms
+
+--- 172.29.5.22 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4007ms
+rtt min/avg/max/mdev = 3.615/3.780/4.031/0.149 ms
+Pinging 172.29.5.29
+PING 172.29.5.29 (172.29.5.29) 56(84) bytes of data.
+64 bytes from 172.29.5.29: icmp_seq=1 ttl=55 time=3.32 ms
+64 bytes from 172.29.5.29: icmp_seq=2 ttl=55 time=3.53 ms
+64 bytes from 172.29.5.29: icmp_seq=3 ttl=55 time=3.41 ms
+64 bytes from 172.29.5.29: icmp_seq=4 ttl=55 time=3.38 ms
+64 bytes from 172.29.5.29: icmp_seq=5 ttl=55 time=4.04 ms
+
+--- 172.29.5.29 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4005ms
+rtt min/avg/max/mdev = 3.321/3.536/4.042/0.261 ms
+Pinging 172.29.5.25
+PING 172.29.5.25 (172.29.5.25) 56(84) bytes of data.
+64 bytes from 172.29.5.25: icmp_seq=1 ttl=53 time=5.35 ms
+64 bytes from 172.29.5.25: icmp_seq=2 ttl=53 time=6.17 ms
+64 bytes from 172.29.5.25: icmp_seq=3 ttl=53 time=5.86 ms
+64 bytes from 172.29.5.25: icmp_seq=4 ttl=53 time=5.91 ms
+64 bytes from 172.29.5.25: icmp_seq=5 ttl=53 time=5.59 ms
+
+--- 172.29.5.25 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4005ms
+rtt min/avg/max/mdev = 5.348/5.774/6.174/0.283 ms
+Pinging 172.29.5.26
+PING 172.29.5.26 (172.29.5.26) 56(84) bytes of data.
+64 bytes from 172.29.5.26: icmp_seq=1 ttl=53 time=5.22 ms
+64 bytes from 172.29.5.26: icmp_seq=2 ttl=53 time=6.00 ms
+64 bytes from 172.29.5.26: icmp_seq=3 ttl=53 time=5.98 ms
+64 bytes from 172.29.5.26: icmp_seq=4 ttl=53 time=6.10 ms
+64 bytes from 172.29.5.26: icmp_seq=5 ttl=53 time=6.84 ms
+
+--- 172.29.5.26 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4004ms
+rtt min/avg/max/mdev = 5.223/6.027/6.836/0.511 ms
+Pinging 172.29.5.30
+PING 172.29.5.30 (172.29.5.30) 56(84) bytes of data.
+64 bytes from 172.29.5.30: icmp_seq=1 ttl=53 time=5.58 ms
+64 bytes from 172.29.5.30: icmp_seq=2 ttl=53 time=5.12 ms
+64 bytes from 172.29.5.30: icmp_seq=3 ttl=53 time=6.16 ms
+64 bytes from 172.29.5.30: icmp_seq=4 ttl=53 time=6.14 ms
+64 bytes from 172.29.5.30: icmp_seq=5 ttl=53 time=5.59 ms
+
+--- 172.29.5.30 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4002ms
+rtt min/avg/max/mdev = 5.115/5.716/6.163/0.394 ms
+Pinging 172.29.5.23
+PING 172.29.5.23 (172.29.5.23) 56(84) bytes of data.
+64 bytes from 172.29.5.23: icmp_seq=1 ttl=59 time=4.19 ms
+64 bytes from 172.29.5.23: icmp_seq=2 ttl=59 time=4.46 ms
+64 bytes from 172.29.5.23: icmp_seq=3 ttl=59 time=4.62 ms
+64 bytes from 172.29.5.23: icmp_seq=4 ttl=59 time=4.35 ms
+64 bytes from 172.29.5.23: icmp_seq=5 ttl=59 time=4.45 ms
+
+--- 172.29.5.23 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4006ms
+rtt min/avg/max/mdev = 4.186/4.414/4.624/0.144 ms
+Pinging 172.29.5.27
+PING 172.29.5.27 (172.29.5.27) 56(84) bytes of data.
+64 bytes from 172.29.5.27: icmp_seq=1 ttl=58 time=6.91 ms
+64 bytes from 172.29.5.27: icmp_seq=2 ttl=58 time=7.18 ms
+64 bytes from 172.29.5.27: icmp_seq=3 ttl=58 time=6.35 ms
+64 bytes from 172.29.5.27: icmp_seq=4 ttl=58 time=7.21 ms
+64 bytes from 172.29.5.27: icmp_seq=5 ttl=58 time=6.70 ms
+
+--- 172.29.5.27 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4006ms
+rtt min/avg/max/mdev = 6.354/6.868/7.208/0.318 ms
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$ ./vnltopo117.sh vhost1 setlossy eth2 0
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$ ./vnltopo117.sh vhost3 setlossy eth0 0
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$ ./vnltopo117.sh vhost2 setlossy eth2 100
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$ ./vnltopo117.sh vhost3 setlossy eth2 100
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$ ./test_ping.sh
+Pinging 172.29.5.17
+PING 172.29.5.17 (172.29.5.17) 56(84) bytes of data.
+64 bytes from 172.29.5.17: icmp_seq=1 ttl=62 time=0.306 ms
+64 bytes from 172.29.5.17: icmp_seq=2 ttl=62 time=0.332 ms
+64 bytes from 172.29.5.17: icmp_seq=3 ttl=62 time=0.454 ms
+64 bytes from 172.29.5.17: icmp_seq=4 ttl=62 time=0.306 ms
+64 bytes from 172.29.5.17: icmp_seq=5 ttl=62 time=0.360 ms
+
+--- 172.29.5.17 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4066ms
+rtt min/avg/max/mdev = 0.306/0.351/0.454/0.054 ms
+Pinging 172.29.5.18
+PING 172.29.5.18 (172.29.5.18) 56(84) bytes of data.
+64 bytes from 172.29.5.18: icmp_seq=1 ttl=57 time=1.73 ms
+64 bytes from 172.29.5.18: icmp_seq=2 ttl=57 time=1.63 ms
+64 bytes from 172.29.5.18: icmp_seq=3 ttl=57 time=1.78 ms
+64 bytes from 172.29.5.18: icmp_seq=4 ttl=57 time=1.61 ms
+64 bytes from 172.29.5.18: icmp_seq=5 ttl=57 time=1.71 ms
+
+--- 172.29.5.18 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4007ms
+rtt min/avg/max/mdev = 1.610/1.692/1.778/0.063 ms
+Pinging 172.29.5.20
+PING 172.29.5.20 (172.29.5.20) 56(84) bytes of data.
+64 bytes from 172.29.5.20: icmp_seq=1 ttl=57 time=1.64 ms
+64 bytes from 172.29.5.20: icmp_seq=2 ttl=57 time=1.58 ms
+64 bytes from 172.29.5.20: icmp_seq=3 ttl=57 time=1.54 ms
+64 bytes from 172.29.5.20: icmp_seq=4 ttl=57 time=1.63 ms
+64 bytes from 172.29.5.20: icmp_seq=5 ttl=57 time=1.82 ms
+
+--- 172.29.5.20 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4007ms
+rtt min/avg/max/mdev = 1.537/1.641/1.821/0.096 ms
+Pinging 172.29.5.24
+PING 172.29.5.24 (172.29.5.24) 56(84) bytes of data.
+64 bytes from 172.29.5.24: icmp_seq=1 ttl=57 time=1.50 ms
+64 bytes from 172.29.5.24: icmp_seq=2 ttl=57 time=1.76 ms
+64 bytes from 172.29.5.24: icmp_seq=3 ttl=57 time=1.88 ms
+64 bytes from 172.29.5.24: icmp_seq=4 ttl=57 time=1.68 ms
+64 bytes from 172.29.5.24: icmp_seq=5 ttl=57 time=1.58 ms
+
+--- 172.29.5.24 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4008ms
+rtt min/avg/max/mdev = 1.498/1.677/1.876/0.131 ms
+Pinging 172.29.5.21
+PING 172.29.5.21 (172.29.5.21) 56(84) bytes of data.
+64 bytes from 172.29.5.21: icmp_seq=1 ttl=55 time=3.50 ms
+64 bytes from 172.29.5.21: icmp_seq=2 ttl=55 time=3.72 ms
+64 bytes from 172.29.5.21: icmp_seq=3 ttl=55 time=3.50 ms
+64 bytes from 172.29.5.21: icmp_seq=4 ttl=55 time=4.05 ms
+64 bytes from 172.29.5.21: icmp_seq=5 ttl=55 time=4.88 ms
+
+--- 172.29.5.21 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4007ms
+rtt min/avg/max/mdev = 3.498/3.931/4.882/0.516 ms
+Pinging 172.29.5.22
+PING 172.29.5.22 (172.29.5.22) 56(84) bytes of data.
+64 bytes from 172.29.5.22: icmp_seq=1 ttl=55 time=3.26 ms
+64 bytes from 172.29.5.22: icmp_seq=2 ttl=55 time=6.13 ms
+64 bytes from 172.29.5.22: icmp_seq=3 ttl=55 time=3.78 ms
+64 bytes from 172.29.5.22: icmp_seq=4 ttl=55 time=3.42 ms
+64 bytes from 172.29.5.22: icmp_seq=5 ttl=55 time=3.37 ms
+
+--- 172.29.5.22 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4017ms
+rtt min/avg/max/mdev = 3.262/3.992/6.133/1.084 ms
+Pinging 172.29.5.29
+PING 172.29.5.29 (172.29.5.29) 56(84) bytes of data.
+64 bytes from 172.29.5.29: icmp_seq=1 ttl=55 time=3.25 ms
+64 bytes from 172.29.5.29: icmp_seq=2 ttl=55 time=3.92 ms
+64 bytes from 172.29.5.29: icmp_seq=3 ttl=55 time=3.65 ms
+64 bytes from 172.29.5.29: icmp_seq=4 ttl=55 time=3.62 ms
+64 bytes from 172.29.5.29: icmp_seq=5 ttl=55 time=3.72 ms
+
+--- 172.29.5.29 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4007ms
+rtt min/avg/max/mdev = 3.246/3.631/3.924/0.220 ms
+Pinging 172.29.5.25
+PING 172.29.5.25 (172.29.5.25) 56(84) bytes of data.
+
+
+
+
+
+
+
+
+
+--- 172.29.5.25 ping statistics ---
+5 packets transmitted, 0 received, 100% packet loss, time 4100ms
+
+Pinging 172.29.5.26
+PING 172.29.5.26 (172.29.5.26) 56(84) bytes of data.
+64 bytes from 172.29.5.26: icmp_seq=1 ttl=55 time=3.73 ms
+64 bytes from 172.29.5.26: icmp_seq=2 ttl=55 time=3.83 ms
+64 bytes from 172.29.5.26: icmp_seq=3 ttl=55 time=3.64 ms
+64 bytes from 172.29.5.26: icmp_seq=4 ttl=55 time=3.63 ms
+64 bytes from 172.29.5.26: icmp_seq=5 ttl=55 time=3.45 ms
+
+--- 172.29.5.26 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4007ms
+rtt min/avg/max/mdev = 3.447/3.655/3.826/0.126 ms
+Pinging 172.29.5.30
+PING 172.29.5.30 (172.29.5.30) 56(84) bytes of data.
+
+--- 172.29.5.30 ping statistics ---
+5 packets transmitted, 0 received, 100% packet loss, time 4096ms
+
+Pinging 172.29.5.23
+PING 172.29.5.23 (172.29.5.23) 56(84) bytes of data.
+64 bytes from 172.29.5.23: icmp_seq=1 ttl=59 time=5.03 ms
+64 bytes from 172.29.5.23: icmp_seq=2 ttl=59 time=4.84 ms
+64 bytes from 172.29.5.23: icmp_seq=3 ttl=59 time=4.75 ms
+64 bytes from 172.29.5.23: icmp_seq=4 ttl=59 time=4.79 ms
+64 bytes from 172.29.5.23: icmp_seq=5 ttl=59 time=5.43 ms
+
+--- 172.29.5.23 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4007ms
+rtt min/avg/max/mdev = 4.745/4.965/5.427/0.249 ms
+Pinging 172.29.5.27
+PING 172.29.5.27 (172.29.5.27) 56(84) bytes of data.
+64 bytes from 172.29.5.27: icmp_seq=1 ttl=59 time=4.28 ms
+64 bytes from 172.29.5.27: icmp_seq=2 ttl=59 time=4.74 ms
+64 bytes from 172.29.5.27: icmp_seq=3 ttl=59 time=5.18 ms
+64 bytes from 172.29.5.27: icmp_seq=4 ttl=59 time=4.69 ms
+64 bytes from 172.29.5.27: icmp_seq=5 ttl=59 time=5.16 ms
+
+--- 172.29.5.27 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4006ms
+rtt min/avg/max/mdev = 4.283/4.811/5.182/0.334 ms
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$ ./test_ping.sh
+Pinging 172.29.5.17
+PING 172.29.5.17 (172.29.5.17) 56(84) bytes of data.
+64 bytes from 172.29.5.17: icmp_seq=1 ttl=62 time=0.451 ms
+64 bytes from 172.29.5.17: icmp_seq=2 ttl=62 time=0.418 ms
+64 bytes from 172.29.5.17: icmp_seq=3 ttl=62 time=0.366 ms
+64 bytes from 172.29.5.17: icmp_seq=4 ttl=62 time=0.377 ms
+64 bytes from 172.29.5.17: icmp_seq=5 ttl=62 time=0.408 ms
+
+--- 172.29.5.17 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4073ms
+rtt min/avg/max/mdev = 0.366/0.404/0.451/0.030 ms
+Pinging 172.29.5.18
+PING 172.29.5.18 (172.29.5.18) 56(84) bytes of data.
+64 bytes from 172.29.5.18: icmp_seq=1 ttl=57 time=1.84 ms
+64 bytes from 172.29.5.18: icmp_seq=2 ttl=57 time=1.88 ms
+64 bytes from 172.29.5.18: icmp_seq=3 ttl=57 time=1.95 ms
+64 bytes from 172.29.5.18: icmp_seq=4 ttl=57 time=1.76 ms
+64 bytes from 172.29.5.18: icmp_seq=5 ttl=57 time=1.80 ms
+
+--- 172.29.5.18 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4006ms
+rtt min/avg/max/mdev = 1.762/1.846/1.947/0.063 ms
+Pinging 172.29.5.20
+PING 172.29.5.20 (172.29.5.20) 56(84) bytes of data.
+64 bytes from 172.29.5.20: icmp_seq=1 ttl=57 time=1.77 ms
+64 bytes from 172.29.5.20: icmp_seq=2 ttl=57 time=1.71 ms
+64 bytes from 172.29.5.20: icmp_seq=3 ttl=57 time=371 ms
+64 bytes from 172.29.5.20: icmp_seq=4 ttl=57 time=1.65 ms
+64 bytes from 172.29.5.20: icmp_seq=5 ttl=57 time=1.66 ms
+
+--- 172.29.5.20 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4007ms
+rtt min/avg/max/mdev = 1.654/75.510/370.765/147.627 ms
+Pinging 172.29.5.24
+PING 172.29.5.24 (172.29.5.24) 56(84) bytes of data.
+64 bytes from 172.29.5.24: icmp_seq=1 ttl=57 time=1.58 ms
+64 bytes from 172.29.5.24: icmp_seq=2 ttl=57 time=2.11 ms
+64 bytes from 172.29.5.24: icmp_seq=3 ttl=57 time=1.86 ms
+64 bytes from 172.29.5.24: icmp_seq=4 ttl=57 time=1.98 ms
+64 bytes from 172.29.5.24: icmp_seq=5 ttl=57 time=1.72 ms
+
+--- 172.29.5.24 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4005ms
+rtt min/avg/max/mdev = 1.579/1.847/2.108/0.185 ms
+Pinging 172.29.5.21
+PING 172.29.5.21 (172.29.5.21) 56(84) bytes of data.
+64 bytes from 172.29.5.21: icmp_seq=1 ttl=55 time=3.75 ms
+64 bytes from 172.29.5.21: icmp_seq=2 ttl=55 time=4.52 ms
+64 bytes from 172.29.5.21: icmp_seq=3 ttl=55 time=3.86 ms
+64 bytes from 172.29.5.21: icmp_seq=4 ttl=55 time=4.26 ms
+64 bytes from 172.29.5.21: icmp_seq=5 ttl=55 time=3.86 ms
+
+--- 172.29.5.21 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4006ms
+rtt min/avg/max/mdev = 3.746/4.049/4.517/0.292 ms
+Pinging 172.29.5.22
+PING 172.29.5.22 (172.29.5.22) 56(84) bytes of data.
+64 bytes from 172.29.5.22: icmp_seq=1 ttl=55 time=3.30 ms
+64 bytes from 172.29.5.22: icmp_seq=2 ttl=55 time=3.95 ms
+64 bytes from 172.29.5.22: icmp_seq=3 ttl=55 time=3.86 ms
+64 bytes from 172.29.5.22: icmp_seq=4 ttl=55 time=4.03 ms
+64 bytes from 172.29.5.22: icmp_seq=5 ttl=55 time=3.87 ms
+
+--- 172.29.5.22 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4006ms
+rtt min/avg/max/mdev = 3.304/3.804/4.034/0.257 ms
+Pinging 172.29.5.29
+PING 172.29.5.29 (172.29.5.29) 56(84) bytes of data.
+64 bytes from 172.29.5.29: icmp_seq=1 ttl=55 time=3.82 ms
+64 bytes from 172.29.5.29: icmp_seq=2 ttl=55 time=3.38 ms
+64 bytes from 172.29.5.29: icmp_seq=3 ttl=55 time=4.05 ms
+64 bytes from 172.29.5.29: icmp_seq=4 ttl=55 time=3.95 ms
+64 bytes from 172.29.5.29: icmp_seq=5 ttl=55 time=4.81 ms
+
+--- 172.29.5.29 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4118ms
+rtt min/avg/max/mdev = 3.382/4.003/4.813/0.464 ms
+Pinging 172.29.5.25
+PING 172.29.5.25 (172.29.5.25) 56(84) bytes of data.
+
+--- 172.29.5.25 ping statistics ---
+5 packets transmitted, 0 received, 100% packet loss, time 4094ms
+
+Pinging 172.29.5.26
+PING 172.29.5.26 (172.29.5.26) 56(84) bytes of data.
+64 bytes from 172.29.5.26: icmp_seq=1 ttl=55 time=3.98 ms
+64 bytes from 172.29.5.26: icmp_seq=2 ttl=55 time=4.60 ms
+64 bytes from 172.29.5.26: icmp_seq=3 ttl=55 time=4.04 ms
+64 bytes from 172.29.5.26: icmp_seq=4 ttl=55 time=3.89 ms
+64 bytes from 172.29.5.26: icmp_seq=5 ttl=55 time=4.06 ms
+
+--- 172.29.5.26 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4006ms
+rtt min/avg/max/mdev = 3.889/4.113/4.598/0.249 ms
+Pinging 172.29.5.30
+PING 172.29.5.30 (172.29.5.30) 56(84) bytes of data.
+
+
+
+
+
+--- 172.29.5.30 ping statistics ---
+5 packets transmitted, 0 received, 100% packet loss, time 4095ms
+
+Pinging 172.29.5.23
+PING 172.29.5.23 (172.29.5.23) 56(84) bytes of data.
+64 bytes from 172.29.5.23: icmp_seq=1 ttl=59 time=4.90 ms
+64 bytes from 172.29.5.23: icmp_seq=2 ttl=59 time=5.21 ms
+64 bytes from 172.29.5.23: icmp_seq=3 ttl=59 time=5.32 ms
+64 bytes from 172.29.5.23: icmp_seq=4 ttl=59 time=5.05 ms
+64 bytes from 172.29.5.23: icmp_seq=5 ttl=59 time=5.22 ms
+
+--- 172.29.5.23 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4005ms
+rtt min/avg/max/mdev = 4.899/5.140/5.320/0.147 ms
+Pinging 172.29.5.27
+PING 172.29.5.27 (172.29.5.27) 56(84) bytes of data.
+64 bytes from 172.29.5.27: icmp_seq=1 ttl=59 time=5.02 ms
+64 bytes from 172.29.5.27: icmp_seq=2 ttl=59 time=5.14 ms
+64 bytes from 172.29.5.27: icmp_seq=3 ttl=59 time=4.99 ms
+64 bytes from 172.29.5.27: icmp_seq=4 ttl=59 time=4.80 ms
+64 bytes from 172.29.5.27: icmp_seq=5 ttl=59 time=4.44 ms
+
+--- 172.29.5.27 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4006ms
+rtt min/avg/max/mdev = 4.437/4.877/5.137/0.245 ms
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$
+ugola@lectura:~/bhav/top117_NEW/CSC525_Router$ ./test_download.sh
+Fetch from server 172.29.5.23
+--2023-12-03 17:31:57--  http://172.29.5.23:16280/
+Connecting to 172.29.5.23:16280... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 2928 (2.9K) [application/octet-stream]
+Saving to: ‘index.html.4’
+
+index.html.4                      100%[==========================================================>]   2.86K  --.-KB/s    in 0s
+
+2023-12-03 17:31:57 (118 MB/s) - ‘index.html.4’ saved [2928/2928]
+
+Fetch from server 172.29.5.27
+--2023-12-03 17:31:59--  http://172.29.5.27:16280/
+Connecting to 172.29.5.27:16280... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 2928 (2.9K) [application/octet-stream]
+Saving to: ‘index.html.5’
+
+index.html.5                      100%[==========================================================>]   2.86K  --.-KB/s    in 0s
+
+2023-12-03 17:31:59 (109 MB/s) - ‘index.html.5’ saved [2928/2928]
+
+Fetch 64MB from server 172.29.5.23
+--2023-12-03 17:32:01--  http://172.29.5.23:16280/64MB.bin
+Connecting to 172.29.5.23:16280... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 67108864 (64M) [application/octet-stream]
+Saving to: ‘64MB.bin.4’
+
+64MB.bin.4                        100%[==========================================================>]  64.00M  1.74MB/s    in 38s
+
+2023-12-03 17:32:39 (1.70 MB/s) - ‘64MB.bin.4’ saved [67108864/67108864]
+
+Fetch 64MB from server 172.29.5.27
+--2023-12-03 17:32:59--  http://172.29.5.27:16280/64MB.bin
+Connecting to 172.29.5.27:16280... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 67108864 (64M) [application/octet-stream]
+Saving to: ‘64MB.bin.5’
+
+64MB.bin.5                        100%[==========================================================>]  64.00M  2.07MB/s    in 34s
+
+2023-12-03 17:33:33 (1.90 MB/s) - ‘64MB.bin.5’ saved [67108864/67108864]
+
+Test Completed

@@ -42,7 +42,7 @@ sr_SRCS = vnlconn.c sr_router.c sr_main.c  \
           sr_if.c sr_rt.c sr_vns_comm.c   \
           sr_dumper.c sha1.c sr_pwospf.c \
 		  IP_Mac_Mapping.c IP_Mac_Mapping_Buffer.c \
-		  router_utilities.c
+		  router_utilities.c network_topology_manager.c
 
 sr_OBJS = $(patsubst %.c,%.o,$(sr_SRCS))
 sr_DEPS = $(patsubst %.c,.%.d,$(sr_SRCS))

@@ -18,8 +18,7 @@
 void addMapping(IP_Mac_Mapping *listHead, uint32_t ipAddress, unsigned char* macAddress) {
     // Allocate memory for the new mapping node
     IP_Mac_Mapping *newMapping = (IP_Mac_Mapping *)malloc(sizeof(IP_Mac_Mapping));
-    assert(newMapping != NULL);  // Ensure that memory allocation was successful
-    
+
     // Initialize the new mapping with the provided IP and MAC address
     newMapping->ip = ipAddress;
     memcpy(newMapping->addr, macAddress, sizeof(newMapping->addr));

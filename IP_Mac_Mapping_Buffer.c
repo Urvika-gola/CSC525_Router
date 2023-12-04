@@ -2,8 +2,10 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <string.h>
-#include "IP_Mac_Mapping_Buffer.h"
+
 #include "sr_router.h"
+#include "IP_Mac_Mapping_Buffer.h"
+
 
 
 /**
